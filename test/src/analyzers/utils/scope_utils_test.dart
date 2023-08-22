@@ -56,3 +56,6 @@
 //     expect(classMethods(thirdClass.declaration, functions), isEmpty);
 //   });
 // }
+
+// ignore: no-empty-block
+void main() {}

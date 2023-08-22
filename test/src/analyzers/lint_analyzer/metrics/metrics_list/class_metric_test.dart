@@ -41,3 +41,6 @@
 //     expect(ClassMetricTest().nodeType(fourthNode, classes, []), isNull);
 //   });
 // }
+
+// ignore: no-empty-block
+void main() {}

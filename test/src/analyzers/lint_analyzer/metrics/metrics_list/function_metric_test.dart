@@ -65,3 +65,6 @@
 //     expect(FunctionMetricTest().nodeType(sixthNode, [], functions), isNull);
 //   });
 // }
+
+// ignore: no-empty-block
+void main() {}
