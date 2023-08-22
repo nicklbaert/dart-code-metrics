@@ -112,7 +112,7 @@ To hide this message pass the 'disable-sunset-warning' option.
       );
   }
 
-  // TODO: Re-add pub_updater after they update their dependencies
+  // TODO(JonasWanke): Re-add pub_updater after they update their dependencies
   // ignore: no-empty-block
   Future<void> _checkForUpdates() async {
     // try {

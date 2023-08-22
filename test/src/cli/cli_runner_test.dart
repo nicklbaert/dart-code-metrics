@@ -2,12 +2,11 @@ import 'dart:io';
 
 import 'package:dart_code_metrics/src/cli/cli_runner.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:pub_updater/pub_updater.dart';
 import 'package:test/test.dart';
 
 class IOSinkMock extends Mock implements IOSink {}
 
-class PubUpdaterMock extends Mock implements PubUpdater {}
+// class PubUpdaterMock extends Mock implements PubUpdater {}
 
 void main() {
   group('Cli runner', () {
@@ -33,7 +32,9 @@ void main() {
       });
 
       test('with version argument', () {
-        CliRunner(output, PubUpdaterMock()).run(['--version']);
+        CliRunner(
+          output, /* PubUpdaterMock() */
+        ).run(['--version']);
 
         final captured =
             verify(() => output.writeln(captureAny())).captured.cast<String>();
