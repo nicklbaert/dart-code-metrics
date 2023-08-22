@@ -1,0 +1,59 @@
+name: Build, Test & Lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: 0 4 * * *
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        sdk: [stable, beta, dev]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+      - run: dart pub get
+
+      - run: dart test
+
+  coverage:
+    name: Coverage
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        sdk: [stable, beta, dev]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+      - run: dart pub get
+
+      - run: dart pub global activate coverage
+      - name: Collect coverage
+        run: dart pub run test_coverage
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        sdk: [stable, beta, dev]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+      - run: dart pub get
+
+      - run: dart analyze
