@@ -23,6 +23,11 @@ class _Visitor extends GeneralizingAstVisitor<void> {
   }
 
   @override
+  void visitNamedType(NamedType node) {
+    _visitIdent(node, node.name2.lexeme);
+  }
+
+  @override
   void visitLibraryIdentifier(LibraryIdentifier node) {
     for (final component in node.components) {
       _visitIdent(node, component.name);
