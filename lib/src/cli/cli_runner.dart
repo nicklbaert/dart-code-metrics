@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:pub_updater/pub_updater.dart';
 
 import '../logger/logger.dart';
 import '../version.dart';
@@ -17,11 +16,13 @@ import 'models/flag_names.dart';
 class CliRunner extends CommandRunner<void> {
   final Logger _logger;
 
-  final PubUpdater? _pubUpdater;
+  // final PubUpdater? _pubUpdater;
 
-  CliRunner([IOSink? output, PubUpdater? pubUpdater])
-      : _logger = Logger(output ?? stdout),
-        _pubUpdater = pubUpdater ?? PubUpdater(),
+  CliRunner([
+    IOSink? output,
+    /* PubUpdater? pubUpdater */
+  ])  : _logger = Logger(output ?? stdout),
+        // _pubUpdater = pubUpdater ?? PubUpdater(),
         super('metrics', 'Analyze and improve your code quality.') {
     [
       AnalyzeCommand(_logger),
@@ -111,17 +112,19 @@ To hide this message pass the 'disable-sunset-warning' option.
       );
   }
 
+  // TODO: Re-add pub_updater after they update their dependencies
+  // ignore: no-empty-block
   Future<void> _checkForUpdates() async {
-    try {
-      final latestVersion =
-          await _pubUpdater?.getLatestVersion('dart_code_metrics');
-      final isUpToDate = packageVersion == latestVersion;
-      if (!isUpToDate && latestVersion != null) {
-        final changelogLink =
-            'https://github.com/dart-code-checker/dart-code-metrics/releases/tag/$latestVersion';
-        _logger.updateAvailable(packageVersion, latestVersion, changelogLink);
-      }
-      // ignore: avoid_catches_without_on_clauses
-    } catch (_) {}
+    // try {
+    //   final latestVersion =
+    //       await _pubUpdater?.getLatestVersion('dart_code_metrics');
+    //   final isUpToDate = packageVersion == latestVersion;
+    //   if (!isUpToDate && latestVersion != null) {
+    //     final changelogLink =
+    //         'https://github.com/dart-code-checker/dart-code-metrics/releases/tag/$latestVersion';
+    //     _logger.updateAvailable(packageVersion, latestVersion, changelogLink);
+    //   }
+    //   // ignore: avoid_catches_without_on_clauses
+    // } catch (_) {}
   }
 }
