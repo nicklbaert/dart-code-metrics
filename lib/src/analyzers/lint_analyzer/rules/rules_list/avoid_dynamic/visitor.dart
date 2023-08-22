@@ -6,22 +6,21 @@ class _Visitor extends RecursiveAstVisitor<void> {
   Iterable<AstNode> get nodes => _nodes;
 
   @override
-  void visitSimpleIdentifier(SimpleIdentifier node) {
-    final parent = node.parent;
-    // ignore: deprecated_member_use
-    if (parent is NamedType && (parent.type?.isDynamic ?? false)) {
-      final grandParent = node.parent?.parent;
-      if (grandParent != null && !_isWithinMap(grandParent)) {
-        _nodes.add(grandParent);
+  void visitNamedType(NamedType node) {
+    if (node.type is DynamicType) {
+      final parent = node.parent;
+      if (parent != null && !_isWithinMap(parent)) {
+        _nodes.add(parent);
       }
     }
+    super.visitNamedType(node);
   }
 
-  bool _isWithinMap(AstNode grandParent) {
-    final grandGrandParent = grandParent.parent;
+  bool _isWithinMap(AstNode parent) {
+    final grandParent = parent.parent;
 
-    return grandGrandParent is NamedType &&
-            (grandGrandParent.type?.isDartCoreMap ?? false) ||
-        grandGrandParent is SetOrMapLiteral && grandGrandParent.isMap;
+    return grandParent is NamedType &&
+            (grandParent.type?.isDartCoreMap ?? false) ||
+        grandParent is SetOrMapLiteral && grandParent.isMap;
   }
 }
