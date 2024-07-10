@@ -38,8 +38,5 @@ dev_dependencies:
   test_lints:
     path: ./test/resources/test_lints
 
-dependency_overrides:
-  meta: ^1.15.0
-
 executables:
   metrics:
