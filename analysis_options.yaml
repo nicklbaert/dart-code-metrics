@@ -18,7 +18,6 @@ analyzer:
 
 dart_code_metrics:
   anti-patterns:
-    - long-method
     - long-parameter-list
   metrics:
     cyclomatic-complexity: 20
@@ -75,12 +74,6 @@ dart_code_metrics:
         max-length: 44
     - prefer-first
     - prefer-last
-    - prefer-match-file-name:
-        exclude:
-          - test/**
-    - prefer-moving-to-variable:
-        exclude:
-          - test/**
     - prefer-trailing-comma
 
 linter:
