@@ -2,7 +2,10 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 
-_Flutter _flutterInstance = _Flutter('flutter', 'package:flutter');
+_Flutter _flutterInstance = _Flutter(
+  'flutter_riverpod',
+  'package:flutter_riverpod',
+);
 
 _Flutter get _flutter => _flutterInstance;
 
@@ -17,13 +20,11 @@ class _Flutter {
   static const _nameWidgetRef = 'WidgetRef';
 
   final String packageName;
-  final String widgetsUri;
 
   final Uri _uriFramework;
 
   _Flutter(this.packageName, String uriPrefix)
-      : widgetsUri = '$uriPrefix/widgets.dart',
-        _uriFramework = Uri.parse('$uriPrefix/src/widgets/framework.dart');
+      : _uriFramework = Uri.parse('$uriPrefix/src/consumer.dart');
 
   bool isWidgetRef(DartType? type, {bool skipNullable = false}) {
     if (type is! InterfaceType) {
