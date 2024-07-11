@@ -34,6 +34,8 @@ class _Flutter {
       return false;
     }
 
+    return type.element.name == _nameWidgetRef;
+
     return isExactly(type.element, _nameWidgetRef, _uriFramework);
   }
 
